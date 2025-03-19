@@ -18,7 +18,6 @@ export class Invoice {
     @Column({nullable: true})
     public validatedAt: Date;
 
-    // toute la logique métier
     constructor(price: number) {
 
         if (price > 500) {
