@@ -8,7 +8,7 @@ import typeOrmDataSource from "./db.config";
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(tokenVerification);
+//app.use(tokenVerification);
 
 typeOrmDataSource
     .initialize()

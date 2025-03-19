@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+import {Invoice} from "../features/invoice/invoice.entity";
 
 const typeOrmDataSource = new DataSource({
     type: "postgres",
@@ -7,10 +8,8 @@ const typeOrmDataSource = new DataSource({
     username: process.env.DB_USER,
     password: process.env.DB_PW,
     database: process.env.DB_NAME,
-    entities: [
-        Task, List
-    ],
     logging: true,
+    entities: [Invoice],
     synchronize: true,
 });
 
