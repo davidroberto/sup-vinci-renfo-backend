@@ -1,6 +1,4 @@
 import { DataSource } from "typeorm";
-import { Task } from "../features/task/task.entity";
-import { List } from "../features/list/list.entity";
 
 const typeOrmDataSource = new DataSource({
     type: "postgres",
