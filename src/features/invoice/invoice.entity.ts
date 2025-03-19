@@ -3,6 +3,20 @@ import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
 export class Invoice {
+    @PrimaryGeneratedColumn()
+    public id: number;
+
+    @Column()
+    public createdAt: Date;
+
+    @Column()
+    public price: number;
+
+    @Column()
+    public status: string;
+
+    @Column({nullable: true})
+    public validatedAt: Date;
 
     // toute la logique métier
     constructor(price: number) {
@@ -16,16 +30,11 @@ export class Invoice {
         this.status = "PENDING";
     }
 
-    @PrimaryGeneratedColumn()
-    public id: number;
 
-    @Column()
-    public createdAt: Date;
+    validate() {
+        this.status = "VALIDATED";
+        this.validatedAt = new Date();
+    }
 
-    @Column()
-    public price: number;
-
-    @Column()
-    public status: string;
 
 }
