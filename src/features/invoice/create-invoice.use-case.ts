@@ -8,18 +8,9 @@ type CreateInvoiceDto = {
 export default class CreateInvoiceUseCase {
 
     public async createInvoice({price}: CreateInvoiceDto): Promise<Invoice> {
-
         const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
 
-        if (price > 500) {
-            throw new Error("Le prix ne peut pas être supérieur à 500");
-        }
-
-        const invoice = invoiceRepository.create({
-            createdAt: new Date(),
-            price: price,
-            status: "PENDING"
-        })
+        const invoice = new Invoice(price);
 
         return await invoiceRepository.save(invoice);
     }
