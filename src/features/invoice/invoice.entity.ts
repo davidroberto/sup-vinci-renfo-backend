@@ -6,16 +6,16 @@ export class Invoice {
     @PrimaryGeneratedColumn()
     public id: number;
 
-    @Column()
+    @Column("date")
     public createdAt: Date;
 
-    @Column()
+    @Column("number")
     public price: number;
 
-    @Column()
+    @Column("string")
     public status: string;
 
-    @Column({nullable: true})
+    @Column({nullable: true, type: "date"})
     public validatedAt: Date;
 
     constructor(price: number) {
