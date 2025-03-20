@@ -5,16 +5,19 @@ type CreateInvoiceDto = {
     price: number;
 }
 
+
 export default class CreateInvoiceUseCase {
 
-    public async createInvoice({price}: CreateInvoiceDto): Promise<Invoice> {
-        const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
+    private invoiceRepository: any;
 
+    constructor(invoiceRepository: any) {
+        this.invoiceRepository = invoiceRepository;
+    }
+
+    public async createInvoice({price}: CreateInvoiceDto): Promise<Invoice> {
         const invoice = new Invoice(price);
 
-        return invoice;
-        
-        //return await invoiceRepository.save(invoice);
+        return await this.invoiceRepository.save(invoice);
     }
 
 

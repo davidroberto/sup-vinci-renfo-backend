@@ -2,6 +2,8 @@ import {Request, Response} from "express";
 import CreateInvoiceUseCase from "./create-invoice.use-case";
 import ValidateInvoiceUseCase from "./validate-invoice.use-case";
 import DeleteInvoiceUseCase from "./delete-invoice.use-case";
+import typeOrmDataSource from "../../config/db.config";
+import {Invoice} from "./invoice.entity";
 const express = require("express");
 const router = express.Router();
 
@@ -10,7 +12,8 @@ router.post('/', async (req: Request, res: Response) => {
 
     const price = req.body.price;
 
-    const createInvoiceUseCase = new CreateInvoiceUseCase();
+    const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
+    const createInvoiceUseCase = new CreateInvoiceUseCase(invoiceRepository);
 
     try {
         const invoice = await createInvoiceUseCase.createInvoice({price});

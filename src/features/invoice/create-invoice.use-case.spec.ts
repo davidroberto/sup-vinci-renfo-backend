@@ -1,9 +1,18 @@
 import CreateInvoiceUseCase from "./create-invoice.use-case";
+import {Invoice} from "./invoice.entity";
 
 describe("En tant qu'artisan, je veux créer une facture",  () => {
 
     test("Quand je créé une facture avec un prix à 200. La facture générée doit contenir une date, un prix à 200 et un status en attente", async () => {
-        const createInvoiceUseCase = new CreateInvoiceUseCase();
+
+        const fakeInvoiceRepository = {
+            save: (invoice: Invoice) => {
+                return invoice;
+            }
+        }
+
+        const createInvoiceUseCase = new CreateInvoiceUseCase(fakeInvoiceRepository);
+
         const invoice = await createInvoiceUseCase.createInvoice({price: 250});
 
         expect(invoice.price).toBe(250);
