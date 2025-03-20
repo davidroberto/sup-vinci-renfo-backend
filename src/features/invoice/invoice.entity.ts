@@ -9,10 +9,10 @@ export class Invoice {
     @Column("date")
     public createdAt: Date;
 
-    @Column("number")
+    @Column("float")
     public price: number;
 
-    @Column("string")
+    @Column("text")
     public status: string;
 
     @Column({nullable: true, type: "date"})

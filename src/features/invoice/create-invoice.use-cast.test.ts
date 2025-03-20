@@ -11,4 +11,13 @@ describe("En tant qu'artisan, je veux créer une facture",  () => {
         expect(invoice.createdAt).toBeInstanceOf(Date);
     });
 
+
+    test("Quand je créé une facture avec un prix à 750, une erreur doit être renvoyée", async () => {
+        const createInvoiceUseCase = new CreateInvoiceUseCase();
+
+        expect(createInvoiceUseCase.createInvoice({price: 750})).rejects.toThrowError("Le prix ne peut pas être supérieur à 500");
+    });
+
+
+
 });

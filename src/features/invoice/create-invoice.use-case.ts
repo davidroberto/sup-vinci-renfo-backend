@@ -14,7 +14,7 @@ export default class CreateInvoiceUseCase {
 
         return invoice;
         
-        return await invoiceRepository.save(invoice);
+        //return await invoiceRepository.save(invoice);
     }
 
 
