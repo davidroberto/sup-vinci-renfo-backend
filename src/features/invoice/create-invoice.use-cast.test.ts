@@ -1,0 +1,10 @@
+import CreateInvoiceUseCase from "./create-invoice.use-case";
+
+describe("En tant qu'artisan, je veux créer une facture avec un prix à 200. La facture générée doit contenir une date, un prix à 200 et un status en attente", async () => {
+    const createInvoiceUseCase = new CreateInvoiceUseCase();
+    const invoice = await createInvoiceUseCase.createInvoice({price: 250});
+
+    assert(invoice.price).toBe(250);
+    assert(invoice.status).toBe('PENDING');
+    assert(invoice.createdAt).toBeInstanceOf(Date);
+});
