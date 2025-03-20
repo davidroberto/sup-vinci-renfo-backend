@@ -28,7 +28,9 @@ router.post('/', async (req: Request, res: Response) => {
 router.put('/:id/validate', async (req: Request, res: Response) => {
 
     const invoiceId = Number(req.params.id);
-    const validateInvoiceUseCase = new ValidateInvoiceUseCase();
+
+    const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
+    const validateInvoiceUseCase = new ValidateInvoiceUseCase(invoiceRepository);
 
     try {
         const invoice = await validateInvoiceUseCase.validateInvoice(invoiceId);
@@ -43,7 +45,9 @@ router.put('/:id/validate', async (req: Request, res: Response) => {
 router.delete('/:id', async (req: Request, res: Response) => {
 
     const invoiceId = Number(req.params.id);
-    const deleteInvoiceUseCase = new DeleteInvoiceUseCase();
+
+    const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
+    const deleteInvoiceUseCase = new DeleteInvoiceUseCase(invoiceRepository);
 
     try {
         await deleteInvoiceUseCase.deleteInvoice(invoiceId);

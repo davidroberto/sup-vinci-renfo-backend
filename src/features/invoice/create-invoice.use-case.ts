@@ -8,11 +8,7 @@ type CreateInvoiceDto = {
 
 export default class CreateInvoiceUseCase {
 
-    private invoiceRepository: any;
-
-    constructor(invoiceRepository: any) {
-        this.invoiceRepository = invoiceRepository;
-    }
+    constructor(private readonly invoiceRepository: any) {}
 
     public async createInvoice({price}: CreateInvoiceDto): Promise<Invoice> {
         const invoice = new Invoice(price);

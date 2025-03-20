@@ -1,18 +1,23 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
 
 
+export enum invoiceStatus {
+    PENDING = "PENDING",
+    VALIDATED = "VALIDATED",
+}
+
 @Entity()
 export class Invoice {
     @PrimaryGeneratedColumn()
     public id: number;
 
-    @Column("date")
+    @Column({nullable: true, type: "date"})
     public createdAt: Date;
 
-    @Column("float")
+    @Column({nullable: true, type: "float"})
     public price: number;
 
-    @Column("text")
+    @Column({nullable: true, type: "text"})
     public status: string;
 
     @Column({nullable: true, type: "date"})
@@ -26,12 +31,12 @@ export class Invoice {
 
         this.price = price;
         this.createdAt = new Date();
-        this.status = "PENDING";
+        this.status = invoiceStatus.PENDING;
     }
 
 
     validate() {
-        this.status = "VALIDATED";
+        this.status = invoiceStatus.VALIDATED;
         this.validatedAt = new Date();
     }
 

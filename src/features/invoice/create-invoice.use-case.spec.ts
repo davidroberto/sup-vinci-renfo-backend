@@ -5,13 +5,13 @@ describe("En tant qu'artisan, je veux créer une facture",  () => {
 
     test("Quand je créé une facture avec un prix à 200. La facture générée doit contenir une date, un prix à 200 et un status en attente", async () => {
 
-        const fakeInvoiceRepository = {
+        const invoiceRepositoryMock = {
             save: (invoice: Invoice) => {
                 return invoice;
             }
         }
 
-        const createInvoiceUseCase = new CreateInvoiceUseCase(fakeInvoiceRepository);
+        const createInvoiceUseCase = new CreateInvoiceUseCase(invoiceRepositoryMock);
 
         const invoice = await createInvoiceUseCase.createInvoice({price: 250});
 
@@ -22,11 +22,16 @@ describe("En tant qu'artisan, je veux créer une facture",  () => {
 
 
     test("Quand je créé une facture avec un prix à 750, une erreur doit être renvoyée", async () => {
-        const createInvoiceUseCase = new CreateInvoiceUseCase();
+
+        const fakeInvoiceRepository = {
+            save: (invoice: Invoice) => {
+                return invoice;
+            }
+        }
+
+        const createInvoiceUseCase = new CreateInvoiceUseCase(fakeInvoiceRepository);
 
         expect(createInvoiceUseCase.createInvoice({price: 750})).rejects.toThrowError("Le prix ne peut pas être supérieur à 500");
     });
-
-
-
+    
 });
