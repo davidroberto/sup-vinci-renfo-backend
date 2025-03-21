@@ -1,5 +1,5 @@
 import CreateInvoiceUseCase from "./create-invoice.use-case";
-import {Invoice} from "./invoice.entity";
+import {Invoice} from "../invoice.entity";
 
 describe("En tant qu'artisan, je veux créer une facture",  () => {
 
