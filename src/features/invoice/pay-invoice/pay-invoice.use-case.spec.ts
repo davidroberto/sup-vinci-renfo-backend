@@ -2,6 +2,7 @@ import ValidateInvoiceUseCase from "../validate-invoice/validate-invoice.use-cas
 import {Invoice} from "../invoice.entity";
 import CancelInvoiceUseCase from "../cancel-invoice/cancel-invoice.use-case";
 import PayInvoiceUseCase from "./pay-invoice.use-case";
+import InvoiceRepositoryInterface from "../invoice.repository.interface";
 
 describe("En tant qu'administrateur, je veux pouvoir payer une facture", () => {
 
@@ -44,7 +45,7 @@ describe("En tant qu'administrateur, je veux pouvoir payer une facture", () => {
             save: (invoice: Invoice) => {
                 return invoice;
             }
-        }
+        } as unknown as InvoiceRepositoryInterface;
 
         const payInvoiceUseCase = new PayInvoiceUseCase(invoiceRepositoryMock);
         expect(payInvoiceUseCase.payInvoice(1)).rejects.toThrowError("La facture doit être validée pour être payée");
@@ -66,7 +67,7 @@ describe("En tant qu'administrateur, je veux pouvoir payer une facture", () => {
             save: (invoice: Invoice) => {
                 return invoice;
             }
-        }
+        } as unknown as InvoiceRepositoryInterface;
 
         const payInvoiceUseCase = new PayInvoiceUseCase(invoiceRepositoryMock);
         expect(payInvoiceUseCase.payInvoice(1)).rejects.toThrowError("La facture est trop ancienne pour être payée");

@@ -6,6 +6,7 @@ import typeOrmDataSource from "../../config/db.config";
 import {Invoice} from "./invoice.entity";
 import CancelInvoiceUseCase from "./cancel-invoice/cancel-invoice.use-case";
 import PayInvoiceUseCase from "./pay-invoice/pay-invoice.use-case";
+import InvoiceTypeOrmRepository from "./invoice.type-orm-repository";
 const express = require("express");
 const router = express.Router();
 
@@ -14,8 +15,8 @@ router.post('/', async (req: Request, res: Response) => {
 
     const price = req.body.price;
 
-    const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
-    const createInvoiceUseCase = new CreateInvoiceUseCase(invoiceRepository);
+    const invoiceRepositoryTypeOrm = new InvoiceTypeOrmRepository();
+    const createInvoiceUseCase = new CreateInvoiceUseCase(invoiceRepositoryTypeOrm);
 
     try {
         const invoice = await createInvoiceUseCase.createInvoice({price});
@@ -31,8 +32,8 @@ router.put('/:id/validate', async (req: Request, res: Response) => {
 
     const invoiceId = Number(req.params.id);
 
-    const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
-    const validateInvoiceUseCase = new ValidateInvoiceUseCase(invoiceRepository);
+    const invoiceRepositoryTypeOrm = new InvoiceTypeOrmRepository();
+    const validateInvoiceUseCase = new ValidateInvoiceUseCase(invoiceRepositoryTypeOrm);
 
     try {
         const invoice = await validateInvoiceUseCase.validateInvoice(invoiceId);
@@ -48,8 +49,8 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
     const invoiceId = Number(req.params.id);
 
-    const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
-    const deleteInvoiceUseCase = new DeleteInvoiceUseCase(invoiceRepository);
+    const invoiceRepositoryTypeOrm = new InvoiceTypeOrmRepository();
+    const deleteInvoiceUseCase = new DeleteInvoiceUseCase(invoiceRepositoryTypeOrm);
 
     try {
         await deleteInvoiceUseCase.deleteInvoice(invoiceId);
@@ -66,8 +67,8 @@ router.put('/:id/cancel', async (req: Request, res: Response) => {
 
     const invoiceId = Number(req.params.id);
 
-    const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
-    const cancelInvoiceUseCase = new CancelInvoiceUseCase(invoiceRepository);
+    const invoiceRepositoryTypeOrm = new InvoiceTypeOrmRepository();
+    const cancelInvoiceUseCase = new CancelInvoiceUseCase(invoiceRepositoryTypeOrm);
 
     try {
         const invoice = await cancelInvoiceUseCase.cancelInvoice(invoiceId);
@@ -82,8 +83,8 @@ router.put('/:id/pay', async (req: Request, res: Response) => {
 
     const invoiceId = Number(req.params.id);
 
-    const invoiceRepository = typeOrmDataSource.getRepository<Invoice>(Invoice);
-    const payInvoiceUseCase = new PayInvoiceUseCase(invoiceRepository);
+    const invoiceRepositoryTypeOrm = new InvoiceTypeOrmRepository();
+    const payInvoiceUseCase = new PayInvoiceUseCase(invoiceRepositoryTypeOrm);
 
     try {
         const invoice = await payInvoiceUseCase.payInvoice(invoiceId);

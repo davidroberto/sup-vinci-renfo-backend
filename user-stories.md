@@ -29,3 +29,9 @@ La facture ne peut être annulée que si elle est en attente.
   - Exemple 1 : J'envoie l'id de la facture 1 (validée). Le système doit me renvoyer la facture de l'id 1 contenant un statut "Payé" et une date de paiement.
   - Exemple 2 : J'envoie l'id de la facture 1 (validée) datant de plus de 3 mois. Le système doit me renvoyer une erreur.
   - Exemple 3 : J'envoie l'id de la facture 1 (en attente). Le système doit me renvoyer une erreur.
+
+
+- En tant qu'artisan, je veux pouvoir modifier le prix d'une facture. Après modification, le nouveau prix doit correspondre à celui modifié et la date de modif doit être inscrite. Je ne peux modifier le prix que si la facture est en attente.
+
+  - Exemple 1 : J'envoie l'id de la facture 1 (en attente et 200e) et un nouveau prix de 300e. Le système doit me renvoyer la facture de l'id 1 contenant un prix de 300e et une date de modification.
+  - Exemple 2 : J'envoie l'id de la facture 1 (validée et 200e) et un nouveau prix de 300e. Le système doit me renvoyer une erreur.

@@ -7,7 +7,7 @@ export default class CancelInvoiceUseCase {
 
     async cancelInvoice(invoiceId: number): Promise<Invoice> {
 
-        const invoice = this.invoiceRepository.findOneBy({id: invoiceId});
+        const invoice = await this.invoiceRepository.findOneBy({id: invoiceId});
 
         if (!invoice) {
             throw new Error("La facture n'existe pas");

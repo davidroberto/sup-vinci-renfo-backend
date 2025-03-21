@@ -31,6 +31,9 @@ export class Invoice {
     @Column({nullable: true, type: "date"})
     public paidAt: Date;
 
+    @Column({nullable: true, type: "date"})
+    public updatedAt: Date;
+
     constructor(price: number) {
 
         if (price > 500) {
@@ -75,6 +78,18 @@ export class Invoice {
 
         this.status = invoiceStatus.PAID;
         this.paidAt = new Date();
+    }
+
+
+    updatePrice(newPrice: number) {
+
+        if (this.status !== invoiceStatus.PENDING) {
+            throw new Error("La facture a déjà été validée");
+        }
+
+
+        this.price = newPrice;
+        this.updatedAt = new Date();
     }
 
 }

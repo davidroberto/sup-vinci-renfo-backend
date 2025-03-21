@@ -1,5 +1,6 @@
 import ValidateInvoiceUseCase from "./validate-invoice.use-case";
 import {Invoice} from "../invoice.entity";
+import InvoiceRepositoryInterface from "../invoice.repository.interface";
 
 describe("En tant qu'administrateur, je veux pouvoir valider une facture", () => {
 
@@ -16,7 +17,7 @@ describe("En tant qu'administrateur, je veux pouvoir valider une facture", () =>
             save: (invoice: Invoice) => {
                 return invoice;
             }
-        }
+        } as unknown as InvoiceRepositoryInterface;
 
         const validateInvoiceUseCase = new ValidateInvoiceUseCase(invoiceRepositoryMock);
         const invoiceValidated = await validateInvoiceUseCase.validateInvoice(1);
@@ -42,7 +43,7 @@ describe("En tant qu'administrateur, je veux pouvoir valider une facture", () =>
             save: (invoice: Invoice) => {
                 return invoice;
             }
-        }
+        } as unknown as InvoiceRepositoryInterface;
 
         const validateInvoiceUseCase = new ValidateInvoiceUseCase(invoiceRepositoryMock);
 

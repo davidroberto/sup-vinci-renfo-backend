@@ -1,6 +1,6 @@
-import ValidateInvoiceUseCase from "../validate-invoice/validate-invoice.use-case";
 import {Invoice} from "../invoice.entity";
 import CancelInvoiceUseCase from "./cancel-invoice.use-case";
+import InvoiceRepositoryInterface from "../invoice.repository.interface";
 
 describe("En tant qu'administrateur, je veux pouvoir annuler une facture", () => {
 
@@ -17,7 +17,7 @@ describe("En tant qu'administrateur, je veux pouvoir annuler une facture", () =>
             save: (invoice: Invoice) => {
                 return invoice;
             },
-        } as unknown as InvoiceRepository;
+        } as unknown as InvoiceRepositoryInterface;
 
         const canceledInvoiceUseCase = new CancelInvoiceUseCase(invoiceRepositoryMock);
         const invoiceCanceled = await canceledInvoiceUseCase.cancelInvoice(1);
@@ -43,7 +43,7 @@ describe("En tant qu'administrateur, je veux pouvoir annuler une facture", () =>
             save: (invoice: Invoice) => {
                 return invoice;
             }
-        }
+        } as unknown as InvoiceRepositoryInterface;
 
         const cancelInvoiceUseCase = new CancelInvoiceUseCase(invoiceRepositoryMock);
 

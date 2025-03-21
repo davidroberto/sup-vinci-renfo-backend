@@ -1,5 +1,6 @@
 import CreateInvoiceUseCase from "./create-invoice.use-case";
 import {Invoice} from "../invoice.entity";
+import InvoiceRepositoryInterface from "../invoice.repository.interface";
 
 describe("En tant qu'artisan, je veux créer une facture",  () => {
 
@@ -9,7 +10,7 @@ describe("En tant qu'artisan, je veux créer une facture",  () => {
             save: (invoice: Invoice) => {
                 return invoice;
             }
-        }
+        } as unknown as InvoiceRepositoryInterface;
 
         const createInvoiceUseCase = new CreateInvoiceUseCase(invoiceRepositoryMock);
 
@@ -27,7 +28,7 @@ describe("En tant qu'artisan, je veux créer une facture",  () => {
             save: (invoice: Invoice) => {
                 return invoice;
             }
-        }
+        } as unknown as InvoiceRepositoryInterface;
 
         const createInvoiceUseCase = new CreateInvoiceUseCase(fakeInvoiceRepository);
 
